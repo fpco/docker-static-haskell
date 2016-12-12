@@ -8,8 +8,7 @@ ADD https://raw.githubusercontent.com/mitchty/alpine-ghc/master/mitch.tishmack%4
 RUN apk update
 RUN apk add alpine-sdk git ca-certificates ghc gmp-dev zlib-dev
 # GRAB A RECENT BINARY OF STACK
-ADD https://s3.amazonaws.com/static-stack/stack-1.1.2-x86_64 /usr/local/bin/stack
-RUN chmod 755 /usr/local/bin/stack
+RUN curl -L https://www.stackage.org/stack/linux-x86_64-static | tar xz --wildcards --strip-components=1 -C /usr/local/bin '*/stack'
 
 # FIX https://bugs.launchpad.net/ubuntu/+source/gcc-4.4/+bug/640734
 WORKDIR /usr/lib/gcc/x86_64-alpine-linux-musl/5.3.0/
