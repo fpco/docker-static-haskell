@@ -10,11 +10,6 @@ RUN apk add alpine-sdk git ca-certificates ghc gmp-dev zlib-dev
 # GRAB A RECENT BINARY OF STACK
 RUN curl -L https://www.stackage.org/stack/linux-x86_64-static | tar xz --wildcards --strip-components=1 -C /usr/local/bin '*/stack'
 
-# FIX https://bugs.launchpad.net/ubuntu/+source/gcc-4.4/+bug/640734
-WORKDIR /usr/lib/gcc/x86_64-alpine-linux-musl/5.3.0/
-RUN cp crtbeginT.o crtbeginT.o.orig
-RUN cp crtbeginS.o crtbeginT.o
-
 # COMPRESS WITH UPX
 ADD https://github.com/lalyos/docker-upx/releases/download/v3.91/upx /usr/local/bin/upx
 RUN chmod 755 /usr/local/bin/upx
